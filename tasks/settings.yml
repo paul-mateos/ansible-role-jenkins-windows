@@ -41,21 +41,21 @@
 - name: Configure Jenkins default users.
   template:
     src: basic-security.groovy
-    dest: "{{ jenkins_home }}/init.groovy.d/basic-security.groovy"
+    dest: "{{ jenkins_home }}\init.groovy.d\basic-security.groovy"
   register: jenkins_users_config
   when: (jenkins_install_package_win is defined and jenkins_install_package_win.changed)
 
 - name: Set web proxy for downloading plugins
   template:
     src: proxy.groovy
-    dest: "{{ jenkins_home }}/init.groovy.d/proxy.groovy"
+    dest: "{{ jenkins_home }}\init.groovy.d\proxy.groovy"
   register: jenkins_proxy_config
   when: (jenkins_install_package_win is defined and jenkins_install_package_win.changed)
 
 - name: Set JNLP port for CLI access
   template:
     src: set_jnlp_port.groovy
-    dest: "{{ jenkins_home }}/init.groovy.d/set_jnlp_port.groovy"
+    dest: "{{ jenkins_home }}\init.groovy.d\set_jnlp_port.groovy"
   register: jenkins_jnlp_port_config
   when: (jenkins_install_package_win is defined and jenkins_install_package_win.changed)
 
@@ -65,6 +65,5 @@
 
 - name: Remove Jenkins security init scripts after first startup.
   win_file:
-    path: "{{ jenkins_home }}/init.groovy.d/basic-security.groovy"
-  when: jenkins_started is defined
+    path: "{{ jenkins_home }}\init.groovy.d\basic-security.groovy"
     state: absent
