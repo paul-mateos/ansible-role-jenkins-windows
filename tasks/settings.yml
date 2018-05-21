@@ -22,7 +22,7 @@
 - name: bypass the security wizard
   template:
     src: jenkins.lastExecVersion
-    dest: "{{ jenkins_home }}/jenkins.install.InstallUtil.lastExecVersion"
+    dest: "{{ jenkins_home }}\jenkins.install.InstallUtil.lastExecVersion"
   register: jenkins_init
 
 # - name: Set HTTP port in Jenkins config.
@@ -35,7 +35,7 @@
 
 - name: Create custom init scripts directory.
   win_file:
-    path: "{{ jenkins_home }}/init.groovy.d"
+    path: "{{ jenkins_home }}\init.groovy.d"
     state: directory
 
 - name: Configure Jenkins default users.
