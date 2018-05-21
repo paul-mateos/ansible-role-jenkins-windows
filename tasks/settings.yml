@@ -22,7 +22,7 @@
 - name: bypass the security wizard
   template:
     src: jenkins.lastExecVersion
-    dest: "{{ jenkins_home }}\jenkins.install.InstallUtil.lastExecVersion"
+    dest: "{{ jenkins_home }}\\jenkins.install.InstallUtil.lastExecVersion"
   register: jenkins_init
 
 # - name: Set HTTP port in Jenkins config.
@@ -35,27 +35,27 @@
 
 - name: Create custom init scripts directory.
   win_file:
-    path: "{{ jenkins_home }}\init.groovy.d"
+    path: "{{ jenkins_home }}\\init.groovy.d"
     state: directory
 
 - name: Configure Jenkins default users.
   template:
     src: basic-security.groovy
-    dest: "{{ jenkins_home }}\init.groovy.d\basic-security.groovy"
+    dest: "{{ jenkins_home }}\\init.groovy.d\\basic-security.groovy"
   register: jenkins_users_config
   when: (jenkins_install_package_win is defined and jenkins_install_package_win.changed)
 
 - name: Set web proxy for downloading plugins
   template:
     src: proxy.groovy
-    dest: "{{ jenkins_home }}\init.groovy.d\proxy.groovy"
+    dest: "{{ jenkins_home }}\\init.groovy.d\\proxy.groovy"
   register: jenkins_proxy_config
   when: (jenkins_install_package_win is defined and jenkins_install_package_win.changed)
 
 - name: Set JNLP port for CLI access
   template:
     src: set_jnlp_port.groovy
-    dest: "{{ jenkins_home }}\init.groovy.d\set_jnlp_port.groovy"
+    dest: "{{ jenkins_home }}\\init.groovy.d\\set_jnlp_port.groovy"
   register: jenkins_jnlp_port_config
   when: (jenkins_install_package_win is defined and jenkins_install_package_win.changed)
 
@@ -65,5 +65,5 @@
 
 - name: Remove Jenkins security init scripts after first startup.
   win_file:
-    path: "{{ jenkins_home }}\init.groovy.d\basic-security.groovy"
+    path: "{{ jenkins_home }}\\init.groovy.d\\basic-security.groovy"
     state: absent
